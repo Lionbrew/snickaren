@@ -311,6 +311,49 @@
   /* ---------- Reveal-animation ---------- */
   .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
   .reveal.in { opacity: 1; transform: none; }
+  /* korten glider in med lätt förskjutning kolumnvis */
+  .cards > *:nth-child(3n+2), .project-grid > *:nth-child(3n+2), .reviews-grid > *:nth-child(3n+2) { transition-delay: .12s; }
+  .cards > *:nth-child(3n+3), .project-grid > *:nth-child(3n+3), .reviews-grid > *:nth-child(3n+3) { transition-delay: .24s; }
+
+  /* ---------- Diskreta grafiska effekter ---------- */
+  /* tunn läsförloppslinje högst upp */
+  #scrollProgress {
+    position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: linear-gradient(90deg, var(--honey), var(--clay));
+    z-index: 100; pointer-events: none;
+  }
+  /* sågtandad överkant på sektioner, som en blinkning till loggan */
+  .saw-edge { position: relative; }
+  .saw-edge::before {
+    content: ""; position: absolute; left: 0; right: 0; top: -9px; height: 9px;
+    background:
+      linear-gradient(-45deg, var(--edge, var(--paper)) 6.4px, transparent 0),
+      linear-gradient(45deg, var(--edge, var(--paper)) 6.4px, transparent 0);
+    background-position: left bottom;
+    background-repeat: repeat-x;
+    background-size: 13px 9px;
+  }
+  .contact.saw-edge { --edge: var(--ink); }
+  /* sågklingan i sidhuvudet snurrar mjukt vid hovring */
+  .brand img { transition: transform .9s cubic-bezier(.2, .65, .25, 1); }
+  .brand:hover img { transform: rotate(90deg); }
+  /* pilen i primärknappen glider med */
+  .btn svg { transition: transform .22s ease; }
+  .btn-primary:hover svg { transform: translateX(4px); }
+  /* tjänstekortens ikon vickar till */
+  .card .icon { transition: transform .3s ease; }
+  .card:hover .icon { transform: rotate(-6deg) scale(1.07); }
+  /* betygsrutan svävar knappt märkbart */
+  @keyframes chipFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+  .hero-chip { animation: chipFloat 5.5s ease-in-out infinite; }
+
+  /* respektera systeminställning om minskad rörelse */
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .hero-chip { animation: none; }
+    .brand img, .btn svg, .card .icon { transition: none; }
+  }
 
   /* ---------- Responsivt ---------- */
   @media (max-width: 900px) {
@@ -338,6 +381,8 @@
 </style>
 </head>
 <body>
+
+<div id="scrollProgress" aria-hidden="true"></div>
 
 <!-- ============ HEADER ============ -->
 <header>
@@ -412,7 +457,7 @@
 </section>
 
 <!-- ============ TJÄNSTER ============ -->
-<section class="section services" id="tjanster">
+<section class="section services saw-edge" id="tjanster">
   <div class="wrap">
     <div class="section-head reveal">
       <span class="kicker" data-i18n="services.kicker">Tjänster</span>
@@ -503,7 +548,7 @@
 </section>
 
 <!-- ============ PROJEKT ============ -->
-<section class="section projects" id="projekt">
+<section class="section projects saw-edge" id="projekt">
   <div class="wrap">
     <div class="section-head reveal">
       <span class="kicker" data-i18n="projects.kicker">Projekt</span>
@@ -560,7 +605,7 @@
 </section>
 
 <!-- ============ KONTAKT ============ -->
-<section class="section contact" id="kontakt">
+<section class="section contact saw-edge" id="kontakt">
   <div class="wrap contact-grid">
     <div class="reveal">
       <span class="kicker" data-i18n="contact.kicker">Kontakt</span>
@@ -800,6 +845,40 @@
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
   }, { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // ---------- Tunn läsförloppslinje ----------
+  const prog = document.getElementById('scrollProgress');
+  let progTick = false;
+  addEventListener('scroll', () => {
+    if (progTick) return;
+    progTick = true;
+    requestAnimationFrame(() => {
+      const max = document.documentElement.scrollHeight - innerHeight;
+      prog.style.width = (max > 0 ? (scrollY / max) * 100 : 0) + '%';
+      progTick = false;
+    });
+  }, { passive: true });
+
+  // ---------- Statistiksiffror räknas upp när de blir synliga ----------
+  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const statIO = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      statIO.unobserve(e.target);
+      const el = e.target;
+      const m = el.textContent.match(/^(\d+)(.*)$/);
+      if (!m || reducedMotion) return;
+      const target = +m[1], suffix = m[2];
+      const t0 = performance.now(), dur = 1100;
+      requestAnimationFrame(function tick(now) {
+        const t = Math.min(1, (now - t0) / dur);
+        const eased = 1 - Math.pow(1 - t, 3);
+        el.textContent = Math.round(target * eased) + suffix;
+        if (t < 1) requestAnimationFrame(tick);
+      });
+    });
+  }, { threshold: 0.6 });
+  document.querySelectorAll('.about-stats b').forEach(el => statIO.observe(el));
 </script>
 
 </body>
