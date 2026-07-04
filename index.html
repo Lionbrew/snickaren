@@ -90,7 +90,9 @@
     padding: 12px 0; gap: 16px;
   }
   .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-  .brand img { width: 48px; height: auto; }
+  /* emblemet är två lager: klingan (roterar) och verktygen (stilla) */
+  .brand .emblem { position: relative; width: 48px; height: 48px; flex: none; }
+  .brand .emblem img { position: absolute; inset: 0; width: 100%; height: 100%; }
   .brand-name { font-family: var(--font-head); font-size: 20px; font-weight: 700; letter-spacing: .01em; line-height: 1.2; }
   .brand-name small { display: block; font-family: var(--font-body); font-size: 11px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--honey-dark); }
   .nav-right { display: flex; align-items: center; gap: 14px; }
@@ -334,9 +336,9 @@
     background-size: 13px 9px;
   }
   .contact.saw-edge { --edge: var(--ink); }
-  /* sågklingan i sidhuvudet snurrar mjukt vid hovring */
-  .brand img { transition: transform .9s cubic-bezier(.2, .65, .25, 1); }
-  .brand:hover img { transform: rotate(90deg); }
+  /* sågklingan i sidhuvudet snurrar mjukt vid hovring, verktygen står stilla */
+  .emblem-klinga { transition: transform .9s cubic-bezier(.2, .65, .25, 1); }
+  .brand:hover .emblem-klinga { transform: rotate(90deg); }
   /* pilen i primärknappen glider med */
   .btn svg { transition: transform .22s ease; }
   .btn-primary:hover svg { transform: translateX(4px); }
@@ -352,7 +354,7 @@
     html { scroll-behavior: auto; }
     .reveal { opacity: 1; transform: none; transition: none; }
     .hero-chip { animation: none; }
-    .brand img, .btn svg, .card .icon { transition: none; }
+    .emblem-klinga, .btn svg, .card .icon { transition: none; }
   }
 
   /* ---------- Responsivt ---------- */
@@ -376,7 +378,7 @@
     .cards, .project-grid, .reviews-grid, .form-row { grid-template-columns: 1fr; }
     .hero-chip { right: 8px; }
     .brand-name { font-size: 17px; }
-    .brand img { width: 40px; }
+    .brand .emblem { width: 40px; height: 40px; }
   }
 </style>
 </head>
@@ -388,7 +390,10 @@
 <header>
   <div class="wrap nav">
     <a class="brand" href="#hem" aria-label="Jimmies Snickeri AB">
-      <img src="logga-emblem.png" alt="Jimmies Snickeri AB logotyp">
+      <span class="emblem" aria-hidden="true">
+        <img class="emblem-klinga" src="logga-klinga.png" alt="">
+        <img src="logga-verktyg.png" alt="">
+      </span>
       <span class="brand-name">Jimmies Snickeri AB<small>Älmhult</small></span>
     </a>
     <div class="nav-right">
