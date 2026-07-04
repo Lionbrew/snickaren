@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jimmies Snickeri AB | Hantverk med hjärta i Älmhult</title>
+<meta name="description" content="Jimmies Snickeri AB i Älmhult. Altaner, kök, renovering och byggnadssnickeri med gedigen kvalitet och personligt bemötande.">
+<link rel="icon" type="image/png" href="logga-emblem.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream:      #FAF4EB;
+    --paper:      #FFFDF8;
+    --sand:       #F1E5D3;
+    --honey:      #C4813C;
+    --honey-dark: #A5672A;
+    --clay:       #9C5B33;
+    --bark:       #4A3628;
+    --ink:        #2B211A;
+    --muted:      #7A6A5B;
+    --line:       #E5D8C5;
+    --radius:     14px;
+    --shadow:     0 10px 30px -12px rgba(43, 33, 26, .18);
+    --font-head:  "Fraunces", Georgia, serif;
+    --font-body:  "Inter", system-ui, -apple-system, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-body);
+    color: var(--ink);
+    background: var(--cream);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  img, svg { display: block; max-width: 100%; }
+  a { color: inherit; }
+
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+
+  h1, h2, h3 { font-family: var(--font-head); font-weight: 600; line-height: 1.15; }
+
+  .kicker {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 13px; font-weight: 600; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--honey-dark);
+    margin-bottom: 14px;
+  }
+  .kicker::before { content: ""; width: 28px; height: 2px; background: var(--honey); border-radius: 2px; }
+
+  .section { padding: 96px 0; }
+  .section-head { max-width: 620px; margin-bottom: 52px; }
+  .section-head h2 { font-size: clamp(30px, 4vw, 42px); margin-bottom: 14px; }
+  .section-head p { color: var(--muted); font-size: 17px; }
+
+  /* ---------- Header ---------- */
+  header {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(250, 244, 235, .92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 0; gap: 16px;
+  }
+  .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .brand img { width: 48px; height: auto; }
+  .brand-name { font-family: var(--font-head); font-size: 20px; font-weight: 700; letter-spacing: .01em; line-height: 1.2; }
+  .brand-name small { display: block; font-family: var(--font-body); font-size: 11px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--honey-dark); }
+  .nav-right { display: flex; align-items: center; gap: 14px; }
+  .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+  .nav-links a {
+    text-decoration: none; font-size: 15px; font-weight: 500; color: var(--bark);
+    padding: 6px 0; border-bottom: 2px solid transparent; transition: .2s;
+  }
+  .nav-links a:hover { color: var(--honey-dark); border-bottom-color: var(--honey); }
+  .nav-cta {
+    background: var(--ink); color: var(--paper) !important; padding: 10px 20px !important;
+    border-radius: 999px; border: none !important; font-weight: 600;
+  }
+  .nav-cta:hover { background: var(--bark); color: var(--paper) !important; }
+  .lang-btn {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: none; border: 1.5px solid var(--line); border-radius: 999px;
+    padding: 8px 14px; font-family: var(--font-body); font-size: 13.5px; font-weight: 700;
+    letter-spacing: .06em; color: var(--bark); cursor: pointer; transition: .2s;
+  }
+  .lang-btn:hover { border-color: var(--honey); color: var(--honey-dark); }
+  .lang-btn svg { width: 16px; height: 16px; }
+  .burger { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+  .burger span { display: block; width: 24px; height: 2px; background: var(--ink); margin: 5px 0; border-radius: 2px; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative; overflow: hidden;
+    background:
+      radial-gradient(900px 500px at 85% -10%, rgba(196, 129, 60, .22), transparent 60%),
+      radial-gradient(700px 420px at -10% 110%, rgba(156, 91, 51, .16), transparent 60%),
+      var(--cream);
+  }
+  .hero-inner {
+    display: grid; grid-template-columns: 1.05fr .95fr; gap: 60px;
+    align-items: center; padding: 90px 0 100px;
+  }
+  .hero h1 { font-size: clamp(40px, 5.6vw, 62px); margin-bottom: 20px; }
+  .hero h1 em { font-style: italic; color: var(--honey-dark); }
+  .hero p.lead { font-size: 19px; color: var(--muted); max-width: 520px; margin-bottom: 32px; }
+  .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 36px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 15px 28px; border-radius: 999px; font-weight: 600; font-size: 16px;
+    text-decoration: none; transition: .2s; border: 1px solid transparent;
+  }
+  .btn-primary { background: var(--honey); color: #fff; box-shadow: 0 8px 20px -8px rgba(165, 103, 42, .55); }
+  .btn-primary:hover { background: var(--honey-dark); transform: translateY(-2px); }
+  .btn-ghost { border-color: var(--bark); color: var(--bark); }
+  .btn-ghost:hover { background: var(--bark); color: var(--paper); }
+  .hero-badges { display: flex; gap: 26px; flex-wrap: wrap; }
+  .hero-badges div { display: flex; align-items: center; gap: 9px; font-size: 14px; font-weight: 500; color: var(--bark); }
+  .hero-badges svg { width: 18px; height: 18px; flex: none; }
+
+  .hero-art { position: relative; }
+  .hero-panel {
+    border-radius: 22px; overflow: hidden; box-shadow: var(--shadow);
+    aspect-ratio: 4 / 4.3; position: relative;
+    background:
+      radial-gradient(120% 90% at 50% 0%, #FFFDF8 0%, var(--sand) 100%);
+    border: 1px solid var(--line);
+  }
+  /* loggan centreras i utrymmet under betygsrutan och skalas att rymmas */
+  .hero-panel img {
+    position: absolute; left: 50%; top: calc(50% + 34px);
+    transform: translate(-50%, -50%);
+    max-width: min(84%, 380px);
+    max-height: calc(100% - 156px);
+    width: auto; height: auto;
+  }
+  .hero-chip {
+    position: absolute; top: 24px; right: -14px;
+    background: var(--paper); border: 1px solid var(--line); border-radius: 14px;
+    padding: 14px 18px; box-shadow: var(--shadow);
+    display: flex; align-items: center; gap: 12px;
+  }
+  .hero-chip .stars { color: var(--honey); font-size: 15px; letter-spacing: 2px; }
+  .hero-chip b { display: block; font-size: 14px; }
+  .hero-chip span { font-size: 12.5px; color: var(--muted); }
+
+  /* ---------- Tjänster ---------- */
+  .services { background: var(--paper); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .card {
+    background: var(--cream); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 30px 28px; transition: .25s;
+  }
+  .card:hover { transform: translateY(-5px); box-shadow: var(--shadow); border-color: var(--honey); }
+  .card .icon {
+    width: 52px; height: 52px; border-radius: 13px; margin-bottom: 20px;
+    background: linear-gradient(140deg, var(--honey), var(--clay));
+    display: grid; place-items: center; color: #fff;
+  }
+  .card .icon svg { width: 26px; height: 26px; }
+  .card h3 { font-size: 21px; margin-bottom: 10px; }
+  .card p { font-size: 15px; color: var(--muted); }
+
+  /* ---------- Om ---------- */
+  .about-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 64px; align-items: center; }
+  .about-art { position: relative; }
+  .about-photo {
+    border-radius: 20px; aspect-ratio: 4/5; overflow: hidden; box-shadow: var(--shadow);
+    background: linear-gradient(150deg, #b58a5c 0%, #8a6242 55%, #6d4a30 100%);
+    position: relative;
+  }
+  .about-photo .photo-hint {
+    position: absolute; inset: 0; display: grid; place-items: center;
+    color: rgba(255,255,255,.85); font-size: 14px; font-weight: 500; text-align: center; padding: 20px;
+  }
+  .about-frame {
+    position: absolute; inset: 18px -18px -18px 18px; z-index: -1;
+    border: 2px solid var(--honey); border-radius: 20px; opacity: .5;
+  }
+  .about-text h2 { font-size: clamp(30px, 4vw, 40px); margin-bottom: 18px; }
+  .about-text p { color: var(--muted); margin-bottom: 16px; font-size: 16.5px; }
+  .about-stats { display: flex; gap: 40px; margin-top: 30px; }
+  .about-stats b { font-family: var(--font-head); font-size: 34px; color: var(--honey-dark); display: block; }
+  .about-stats span { font-size: 14px; color: var(--muted); }
+
+  .grain { position: absolute; inset: 0; opacity: .5; }
+
+  /* ---------- Projekt ---------- */
+  .projects { background: var(--paper); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .project-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .project {
+    border-radius: var(--radius); overflow: hidden; position: relative;
+    aspect-ratio: 4/3; cursor: pointer; box-shadow: 0 4px 14px -8px rgba(43,33,26,.25);
+  }
+  .project .ph { position: absolute; inset: 0; }
+  .project:nth-child(1) .ph { background: linear-gradient(140deg, #c99e6b, #96683d); }
+  .project:nth-child(2) .ph { background: linear-gradient(140deg, #a87c50, #6d4a30); }
+  .project:nth-child(3) .ph { background: linear-gradient(140deg, #8a6242, #55371f); }
+  .project:nth-child(4) .ph { background: linear-gradient(140deg, #b58a5c, #7c583a); }
+  .project:nth-child(5) .ph { background: linear-gradient(140deg, #96683d, #5f3f24); }
+  .project:nth-child(6) .ph { background: linear-gradient(140deg, #c4813c, #8a5a2e); }
+  .project .label {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    padding: 40px 18px 16px;
+    background: linear-gradient(transparent, rgba(30, 20, 12, .78));
+    color: #fff; transition: .25s;
+  }
+  .project .label b { display: block; font-size: 16px; }
+  .project .label span { font-size: 13px; opacity: .85; }
+  .project:hover .label { padding-bottom: 22px; }
+  .projects-note { margin-top: 26px; font-size: 14px; color: var(--muted); text-align: center; }
+
+  /* ---------- Omdömen ---------- */
+  .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .review {
+    background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 30px 28px; display: flex; flex-direction: column; gap: 16px;
+    box-shadow: 0 4px 14px -10px rgba(43,33,26,.15);
+  }
+  .review .stars { color: var(--honey); letter-spacing: 3px; font-size: 16px; }
+  .review p { font-size: 15.5px; color: var(--bark); flex: 1; }
+  .review .who { display: flex; align-items: center; gap: 12px; }
+  .review .avatar {
+    width: 42px; height: 42px; border-radius: 50%;
+    background: linear-gradient(140deg, var(--honey), var(--clay));
+    color: #fff; display: grid; place-items: center; font-weight: 700; font-size: 15px;
+  }
+  .review .who b { display: block; font-size: 14.5px; }
+  .review .who span { font-size: 13px; color: var(--muted); }
+
+  /* ---------- Kontakt ---------- */
+  .contact { background: var(--ink); color: var(--cream); }
+  .contact .kicker { color: var(--honey); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 64px; }
+  .contact h2 { font-size: clamp(30px, 4vw, 40px); margin-bottom: 16px; }
+  .contact .intro { color: #cbbba9; margin-bottom: 34px; }
+  .contact-item { display: flex; gap: 16px; margin-bottom: 22px; align-items: flex-start; }
+  .contact-item .ci {
+    width: 44px; height: 44px; border-radius: 12px; flex: none;
+    background: rgba(196, 129, 60, .18); border: 1px solid rgba(196, 129, 60, .4);
+    display: grid; place-items: center; color: var(--honey);
+  }
+  .contact-item .ci svg { width: 20px; height: 20px; }
+  .contact-item b { display: block; font-size: 15px; }
+  .contact-item a, .contact-item span { color: #cbbba9; text-decoration: none; font-size: 15px; }
+  .contact-item a:hover { color: var(--honey); }
+  .socials { display: flex; gap: 12px; margin-top: 30px; }
+  .socials a {
+    width: 44px; height: 44px; border-radius: 12px;
+    border: 1px solid rgba(250, 244, 235, .25);
+    display: grid; place-items: center; color: var(--cream); transition: .2s;
+  }
+  .socials a:hover { background: var(--honey); border-color: var(--honey); color: #fff; }
+  .socials svg { width: 20px; height: 20px; }
+
+  .form-card {
+    background: var(--paper); color: var(--ink); border-radius: 18px;
+    padding: 36px; box-shadow: var(--shadow);
+  }
+  .form-card h3 { font-size: 23px; margin-bottom: 6px; }
+  .form-card .hint { font-size: 14px; color: var(--muted); margin-bottom: 24px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .field { margin-bottom: 14px; }
+  .field label { display: block; font-size: 13.5px; font-weight: 600; margin-bottom: 6px; color: var(--bark); }
+  .field input, .field textarea, .field select {
+    width: 100%; padding: 12px 14px; border-radius: 10px;
+    border: 1px solid var(--line); background: var(--cream);
+    font-family: var(--font-body); font-size: 15px; color: var(--ink);
+    transition: .2s; outline: none;
+  }
+  .field input:focus, .field textarea:focus, .field select:focus {
+    border-color: var(--honey); box-shadow: 0 0 0 3px rgba(196, 129, 60, .18);
+  }
+  .field textarea { resize: vertical; min-height: 110px; }
+  .form-card .btn { width: 100%; justify-content: center; border: none; cursor: pointer; font-family: var(--font-body); }
+  .form-note { font-size: 12.5px; color: var(--muted); margin-top: 12px; text-align: center; }
+
+  /* ---------- Footer ---------- */
+  footer { background: #211a14; color: #9b8b7a; padding: 34px 0; font-size: 14px; }
+  .foot { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .foot .brand-name { color: var(--cream); font-size: 17px; }
+  .foot .brand-name small { color: var(--honey); }
+
+  /* ---------- Reveal-animation ---------- */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+
+  /* ---------- Responsivt ---------- */
+  @media (max-width: 900px) {
+    .section { padding: 68px 0; }
+    .hero-inner { grid-template-columns: 1fr; gap: 44px; padding: 56px 0 70px; }
+    .hero-art { max-width: 460px; }
+    .cards, .project-grid, .reviews-grid { grid-template-columns: 1fr 1fr; }
+    .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 44px; }
+    .nav-links {
+      display: none; position: absolute; top: 100%; left: 0; right: 0;
+      background: var(--cream); border-bottom: 1px solid var(--line);
+      flex-direction: column; align-items: flex-start; gap: 0; padding: 10px 24px 20px;
+    }
+    .nav-links.open { display: flex; }
+    .nav-links li { padding: 10px 0; }
+    .nav-cta { display: inline-block; margin-top: 8px; text-align: center; }
+    .burger { display: block; }
+  }
+  @media (max-width: 580px) {
+    .cards, .project-grid, .reviews-grid, .form-row { grid-template-columns: 1fr; }
+    .hero-chip { right: 8px; }
+    .brand-name { font-size: 17px; }
+    .brand img { width: 40px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#hem" aria-label="Jimmies Snickeri AB">
+      <img src="logga-emblem.png" alt="Jimmies Snickeri AB logotyp">
+      <span class="brand-name">Jimmies Snickeri AB<small>Älmhult</small></span>
+    </a>
+    <div class="nav-right">
+      <nav>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#tjanster" data-i18n="nav.services">Tjänster</a></li>
+          <li><a href="#om" data-i18n="nav.about">Om Jimmie</a></li>
+          <li><a href="#projekt" data-i18n="nav.projects">Projekt</a></li>
+          <li><a href="#omdomen" data-i18n="nav.reviews">Omdömen</a></li>
+          <li><a class="nav-cta" href="#kontakt" data-i18n="nav.cta">Begär offert</a></li>
+        </ul>
+      </nav>
+      <button class="lang-btn" id="langBtn" aria-label="Switch language">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg>
+        <span id="langLabel">EN</span>
+      </button>
+      <button class="burger" id="burger" aria-label="Öppna meny">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="hem">
+  <div class="wrap hero-inner">
+    <div>
+      <span class="kicker" data-i18n="hero.kicker">Snickeri &amp; byggnadshantverk i Älmhult</span>
+      <h1 data-i18n="hero.h1">Hantverk byggt för att <em>hålla i generationer</em></h1>
+      <p class="lead" data-i18n="hero.lead">Från altan och kök till helrenovering. Jimmies Snickeri AB hjälper dig hela vägen från idé till färdigt resultat, med gedigen kvalitet och ett personligt bemötande.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="#kontakt">
+          <span data-i18n="hero.btn1">Begär kostnadsfri offert</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="btn btn-ghost" href="#projekt" data-i18n="hero.btn2">Se tidigare projekt</a>
+      </div>
+      <div class="hero-badges">
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#A5672A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+          <span data-i18n="hero.badge1">F-skatt &amp; försäkring</span>
+        </div>
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#A5672A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+          <span data-i18n="hero.badge2">Fast pris eller löpande</span>
+        </div>
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#A5672A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+          <span data-i18n="hero.badge3">ROT-avdrag</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-art">
+      <div class="hero-panel">
+        <img src="logga-fri.png" alt="Jimmies Snickeri AB, bygg och snickeri">
+      </div>
+      <div class="hero-chip">
+        <div>
+          <div class="stars">★★★★★</div>
+          <b data-i18n="hero.chip1">5,0 i snittbetyg</b>
+          <span data-i18n="hero.chip2">Baserat på 27 omdömen</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TJÄNSTER ============ -->
+<section class="section services" id="tjanster">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="kicker" data-i18n="services.kicker">Tjänster</span>
+      <h2 data-i18n="services.h2">Det här hjälper vi dig med</h2>
+      <p data-i18n="services.p">Stort som smått, inga projekt är för små. Hör av dig så tittar vi på det tillsammans.</p>
+    </div>
+    <div class="cards">
+      <div class="card reveal">
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M4 21V8l8-5 8 5v13M9 21v-6h6v6"/></svg>
+        </div>
+        <h3 data-i18n="card1.h">Altaner &amp; uterum</h3>
+        <p data-i18n="card1.p">Altandäck, trappor, pergolor och uterum som förlänger sommaren. Byggt för att stå emot väder och vind.</p>
+      </div>
+      <div class="card reveal">
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 12h18M12 12v8M7 8h.01M11 8h.01"/></svg>
+        </div>
+        <h3 data-i18n="card2.h">Kök &amp; inredning</h3>
+        <p data-i18n="card2.p">Köksmontering, platsbyggda garderober och smarta förvaringslösningar anpassade exakt efter ditt hem.</p>
+      </div>
+      <div class="card reveal">
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4.5 4.5 0 0 0-6 6L3 18l3 3 5.7-5.7a4.5 4.5 0 0 0 6-6L15 12l-3-3 2.7-2.7z"/></svg>
+        </div>
+        <h3 data-i18n="card3.h">Renovering</h3>
+        <p data-i18n="card3.p">Helrenoveringar och ytskikt som golv, innertak, lister och väggar. Vi tar hand om helheten från start till mål.</p>
+      </div>
+      <div class="card reveal">
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="1.5"/><path d="M5 12h14M12 3v18"/></svg>
+        </div>
+        <h3 data-i18n="card4.h">Fönster &amp; dörrar</h3>
+        <p data-i18n="card4.p">Byte och montering av fönster, ytterdörrar och innerdörrar. Tätt, snyggt och energismart.</p>
+      </div>
+      <div class="card reveal">
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19h16M6 19V9.5L12 5l6 4.5V19M9 19v-4h6v4"/></svg>
+        </div>
+        <h3 data-i18n="card5.h">Garage &amp; förråd</h3>
+        <p data-i18n="card5.p">Carportar, garage, förråd och attefallshus. Rejäla byggnader som håller i många år.</p>
+      </div>
+      <div class="card reveal">
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+        </div>
+        <h3 data-i18n="card6.h">Totalentreprenad</h3>
+        <p data-i18n="card6.p">Större projekt? Vi samordnar el, VVS och måleri via pålitliga samarbetspartners. Du har en enda kontakt genom hela projektet.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ OM ============ -->
+<section class="section" id="om">
+  <div class="wrap about-grid">
+    <div class="about-art reveal">
+      <div class="about-photo">
+        <svg class="grain" width="100%" height="100%" preserveAspectRatio="none" viewBox="0 0 400 500" aria-hidden="true">
+          <g stroke="rgba(255,240,220,.18)" stroke-width="2" fill="none">
+            <path d="M-20 60 C 120 40, 260 90, 420 65"/>
+            <path d="M-20 140 C 140 120, 240 170, 420 145"/>
+            <path d="M-20 220 C 110 205, 280 245, 420 225"/>
+            <path d="M-20 300 C 150 280, 230 330, 420 305"/>
+            <path d="M-20 380 C 120 365, 270 405, 420 385"/>
+            <path d="M-20 455 C 140 440, 240 485, 420 460"/>
+            <ellipse cx="290" cy="180" rx="36" ry="15"/>
+            <ellipse cx="290" cy="180" rx="19" ry="8"/>
+          </g>
+        </svg>
+        <div class="photo-hint" data-i18n="about.hint">Platshållare.<br>Foto på Jimmie i verkstaden.</div>
+      </div>
+      <div class="about-frame"></div>
+    </div>
+    <div class="about-text reveal">
+      <span class="kicker" data-i18n="about.kicker">Om Jimmie</span>
+      <h2 data-i18n="about.h2">En snickare som bryr sig om detaljerna</h2>
+      <p data-i18n="about.p1">Jimmies Snickeri AB drivs av Jimmie, snickare med många års erfarenhet av allt från finsnickeri till större byggprojekt. Företaget utgår från Älmhult.</p>
+      <p data-i18n="about.p2">För Jimmie är inget jobb klart förrän kunden är helt nöjd. Det märks i de små detaljerna: raka linjer, snygga avslut och en arbetsplats som lämnas städad varje dag.</p>
+      <p data-i18n="about.p3">Du får alltid en tydlig offert innan arbetet börjar och löpande uppdateringar under projektets gång. Resultatet ska hålla i många år.</p>
+      <div class="about-stats">
+        <div><b>15+</b><span data-i18n="about.s1">år i branschen</span></div>
+        <div><b>200+</b><span data-i18n="about.s2">genomförda projekt</span></div>
+        <div><b>100%</b><span data-i18n="about.s3">nöjda kunder</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROJEKT ============ -->
+<section class="section projects" id="projekt">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="kicker" data-i18n="projects.kicker">Projekt</span>
+      <h2 data-i18n="projects.h2">Ett urval av tidigare arbeten</h2>
+      <p data-i18n="projects.p">Här kommer bilder på Jimmies riktiga projekt att visas. Tills dess ligger platshållare med exempel på uppdragstyper.</p>
+    </div>
+    <div class="project-grid">
+      <div class="project reveal"><div class="ph"></div><div class="label"><b data-i18n="proj1.h">Altan med pergola</b><span data-i18n="proj1.s">Villa, Älmhult</span></div></div>
+      <div class="project reveal"><div class="ph"></div><div class="label"><b data-i18n="proj2.h">Fönsterbyte</b><span data-i18n="proj2.s">1920-talsvilla, Älmhult</span></div></div>
+      <div class="project reveal"><div class="ph"></div><div class="label"><b data-i18n="proj3.h">Köksrenovering</b><span data-i18n="proj3.s">Radhus, Liatorp</span></div></div>
+      <div class="project reveal"><div class="ph"></div><div class="label"><b data-i18n="proj4.h">Uterum</b><span data-i18n="proj4.s">Fritidshus, Möckeln</span></div></div>
+      <div class="project reveal"><div class="ph"></div><div class="label"><b data-i18n="proj5.h">Attefallshus</b><span data-i18n="proj5.s">Villa, Diö</span></div></div>
+      <div class="project reveal"><div class="ph"></div><div class="label"><b data-i18n="proj6.h">Carport och förråd</b><span data-i18n="proj6.s">Villa, Häradsbäck</span></div></div>
+    </div>
+    <p class="projects-note" data-i18n="projects.note">Fler bilder finns på våra sociala medier. Följ oss gärna på Facebook och Instagram!</p>
+  </div>
+</section>
+
+<!-- ============ OMDÖMEN ============ -->
+<section class="section" id="omdomen">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="kicker" data-i18n="reviews.kicker">Omdömen</span>
+      <h2 data-i18n="reviews.h2">Vad kunderna säger</h2>
+      <p data-i18n="reviews.p">Ett gott rykte byggs en kund i taget. Här är några röster från tidigare uppdrag.</p>
+    </div>
+    <div class="reviews-grid">
+      <div class="review reveal">
+        <div class="stars">★★★★★</div>
+        <p data-i18n="rev1.p">”Jimmie byggde vår nya altan och vi kunde inte vara nöjdare. Snabb, noggrann och otroligt trevlig. Han kom med smarta förslag vi inte tänkt på själva.”</p>
+        <div class="who">
+          <div class="avatar">AL</div>
+          <div><b>Anna &amp; Lars Petersson</b><span data-i18n="rev1.s">Altanbygge, Älmhult</span></div>
+        </div>
+      </div>
+      <div class="review reveal">
+        <div class="stars">★★★★★</div>
+        <p data-i18n="rev2.p">”Fick hela köket monterat på utsatt tid och till offererat pris. Städat och snyggt varje dag. Rekommenderas varmt!”</p>
+        <div class="who">
+          <div class="avatar">ME</div>
+          <div><b>Maria Eklund</b><span data-i18n="rev2.s">Köksmontering, Liatorp</span></div>
+        </div>
+      </div>
+      <div class="review reveal">
+        <div class="stars">★★★★★</div>
+        <p data-i18n="rev3.p">”Jimmie renoverade vårt vardagsrum med nya golv, lister och innertak. Proffsigt utfört från början till slut. Vi återkommer gärna med fler projekt.”</p>
+        <div class="who">
+          <div class="avatar">JH</div>
+          <div><b>Johan Hult</b><span data-i18n="rev3.s">Renovering, Diö</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ KONTAKT ============ -->
+<section class="section contact" id="kontakt">
+  <div class="wrap contact-grid">
+    <div class="reveal">
+      <span class="kicker" data-i18n="contact.kicker">Kontakt</span>
+      <h2 data-i18n="contact.h2">Berätta om ditt projekt</h2>
+      <p class="intro" data-i18n="contact.intro">Ring, mejla eller skicka formuläret. Du får alltid svar och en kostnadsfri offert utan förpliktelser.</p>
+
+      <!-- OBS: Fiktiva kontaktuppgifter. Byt ut när Jimmie har riktiga. -->
+      <div class="contact-item">
+        <div class="ci">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.4 2.1L8.1 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.6 2z"/></svg>
+        </div>
+        <div><b data-i18n="contact.l1">Telefon</b><a href="tel:+46701234567">070-123 45 67</a></div>
+      </div>
+      <div class="contact-item">
+        <div class="ci">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+        </div>
+        <div><b data-i18n="contact.l2">E-post</b><a href="mailto:info@jimmiessnickeri.se">info@jimmiessnickeri.se</a></div>
+      </div>
+      <div class="contact-item">
+        <div class="ci">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div><b data-i18n="contact.l3">Utgår från</b><span data-i18n="contact.v3">Snickarvägen 1, 343 31 Älmhult</span></div>
+      </div>
+      <div class="contact-item">
+        <div class="ci">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+        </div>
+        <div><b data-i18n="contact.l4">Öppettider</b><span data-i18n="contact.v4">Måndag till fredag, 07.00 till 17.00</span></div>
+      </div>
+
+      <div class="socials">
+        <!-- Fiktiva sociala länkar -->
+        <a href="https://facebook.com/jimmiessnickeri" aria-label="Facebook" title="Facebook (platshållare)">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-7h2.4l.4-3h-2.8V9.1c0-.9.3-1.5 1.6-1.5h1.3V4.9c-.3 0-1.1-.1-2-.1-2.1 0-3.4 1.2-3.4 3.5V11H8.5v3H11v7h2.5z"/></svg>
+        </a>
+        <a href="https://instagram.com/jimmiessnickeri" aria-label="Instagram" title="Instagram (platshållare)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".8" fill="currentColor" stroke="none"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="form-card reveal">
+      <h3 data-i18n="form.h3">Begär offert</h3>
+      <p class="hint" data-i18n="form.hint">Beskriv kort vad du vill ha hjälp med så återkommer Jimmie.</p>
+      <form id="quoteForm">
+        <div class="form-row">
+          <div class="field">
+            <label for="f-namn" data-i18n="form.name">Namn</label>
+            <input id="f-namn" type="text" data-i18n-ph="form.namePh" placeholder="Ditt namn" required>
+          </div>
+          <div class="field">
+            <label for="f-tel" data-i18n="form.phone">Telefon</label>
+            <input id="f-tel" type="tel" placeholder="070-123 45 67">
+          </div>
+        </div>
+        <div class="field">
+          <label for="f-mail" data-i18n="form.email">E-post</label>
+          <input id="f-mail" type="email" data-i18n-ph="form.emailPh" placeholder="din@mail.se" required>
+        </div>
+        <div class="field">
+          <label for="f-typ" data-i18n="form.type">Typ av projekt</label>
+          <select id="f-typ">
+            <option data-i18n="form.opt1">Altan / uterum</option>
+            <option data-i18n="form.opt2">Kök / inredning</option>
+            <option data-i18n="form.opt3">Renovering</option>
+            <option data-i18n="form.opt4">Fönster / dörrar</option>
+            <option data-i18n="form.opt5">Garage / förråd</option>
+            <option data-i18n="form.opt6">Annat</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="f-msg" data-i18n="form.msg">Beskriv ditt projekt</label>
+          <textarea id="f-msg" data-i18n-ph="form.msgPh" placeholder="Berätta kort om vad du vill ha gjort..."></textarea>
+        </div>
+        <button class="btn btn-primary" type="submit" data-i18n="form.send">Skicka förfrågan</button>
+        <p class="form-note" data-i18n="form.note">Kostnadsfritt och utan förpliktelser. Vi delar aldrig dina uppgifter.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap foot">
+    <div class="brand-name">Jimmies Snickeri AB<small>Älmhult</small></div>
+    <div data-i18n="footer.legal">© 2026 Jimmies Snickeri AB · Org.nr 000000-0000 (platshållare) · Innehav av F-skattsedel</div>
+  </div>
+</footer>
+
+<script>
+  // ---------- Språkväxling ----------
+  const EN = {
+    'nav.services': 'Services',
+    'nav.about': 'About Jimmie',
+    'nav.projects': 'Projects',
+    'nav.reviews': 'Reviews',
+    'nav.cta': 'Request a quote',
+    'hero.kicker': 'Carpentry &amp; construction in Älmhult, Sweden',
+    'hero.h1': 'Craftsmanship built to <em>last for generations</em>',
+    'hero.lead': 'From decks and kitchens to full renovations. Jimmies Snickeri AB guides you all the way from idea to finished result, with solid quality and a personal touch.',
+    'hero.btn1': 'Request a free quote',
+    'hero.btn2': 'See previous projects',
+    'hero.badge1': 'F-tax certified &amp; insured',
+    'hero.badge2': 'Fixed or hourly pricing',
+    'hero.badge3': 'ROT tax deduction',
+    'hero.chip1': '5.0 average rating',
+    'hero.chip2': 'Based on 27 reviews',
+    'services.kicker': 'Services',
+    'services.h2': 'How we can help you',
+    'services.p': 'Big or small, no project is too little. Get in touch and we will have a look together.',
+    'card1.h': 'Decks &amp; sunrooms',
+    'card1.p': 'Decks, stairs, pergolas and sunrooms that extend the summer. Built to withstand the elements.',
+    'card2.h': 'Kitchens &amp; interiors',
+    'card2.p': 'Kitchen installation, built-in wardrobes and smart storage solutions tailored to your home.',
+    'card3.h': 'Renovation',
+    'card3.p': 'Full renovations and surface work such as flooring, ceilings, mouldings and walls. We handle everything from start to finish.',
+    'card4.h': 'Windows &amp; doors',
+    'card4.p': 'Replacement and installation of windows, front doors and interior doors. Tight, tidy and energy smart.',
+    'card5.h': 'Garages &amp; sheds',
+    'card5.p': 'Carports, garages, sheds and garden houses. Sturdy buildings that last for many years.',
+    'card6.h': 'General contracting',
+    'card6.p': 'Bigger project? We coordinate electrical, plumbing and painting through trusted partners. You have a single point of contact throughout.',
+    'about.hint': 'Placeholder.<br>Photo of Jimmie in the workshop.',
+    'about.kicker': 'About Jimmie',
+    'about.h2': 'A carpenter who cares about the details',
+    'about.p1': 'Jimmies Snickeri AB is run by Jimmie, a carpenter with many years of experience in everything from fine carpentry to larger construction projects. The company is based in Älmhult, Sweden.',
+    'about.p2': 'For Jimmie, no job is finished until the customer is completely satisfied. You can tell by the small details: straight lines, clean finishes and a work site left tidy every day.',
+    'about.p3': 'You always get a clear quote before work begins and regular updates along the way. The result is meant to last for many years.',
+    'about.s1': 'years in the trade',
+    'about.s2': 'completed projects',
+    'about.s3': 'happy customers',
+    'projects.kicker': 'Projects',
+    'projects.h2': 'A selection of previous work',
+    'projects.p': 'Photos of Jimmie’s real projects will be shown here. Until then, these are placeholders with examples of typical jobs.',
+    'proj1.h': 'Deck with pergola', 'proj1.s': 'House, Älmhult',
+    'proj2.h': 'Window replacement', 'proj2.s': '1920s house, Älmhult',
+    'proj3.h': 'Kitchen renovation', 'proj3.s': 'Townhouse, Liatorp',
+    'proj4.h': 'Sunroom', 'proj4.s': 'Summer house, Möckeln',
+    'proj5.h': 'Garden house', 'proj5.s': 'House, Diö',
+    'proj6.h': 'Carport and shed', 'proj6.s': 'House, Häradsbäck',
+    'projects.note': 'More photos on our social media. Follow us on Facebook and Instagram!',
+    'reviews.kicker': 'Reviews',
+    'reviews.h2': 'What our customers say',
+    'reviews.p': 'A good reputation is built one customer at a time. Here are a few voices from previous jobs.',
+    'rev1.p': '”Jimmie built our new deck and we could not be happier. Fast, meticulous and incredibly friendly. He came up with smart suggestions we had not thought of ourselves.”',
+    'rev1.s': 'Deck build, Älmhult',
+    'rev2.p': '”Our whole kitchen was installed on time and at the quoted price. Clean and tidy every day. Warmly recommended!”',
+    'rev2.s': 'Kitchen installation, Liatorp',
+    'rev3.p': '”Jimmie renovated our living room with new floors, mouldings and ceiling. Professional work from start to finish. We will gladly be back with more projects.”',
+    'rev3.s': 'Renovation, Diö',
+    'contact.kicker': 'Contact',
+    'contact.h2': 'Tell us about your project',
+    'contact.intro': 'Call, email or send the form. You always get a reply and a free quote with no obligations.',
+    'contact.l1': 'Phone',
+    'contact.l2': 'Email',
+    'contact.l3': 'Based in',
+    'contact.v3': 'Snickarvägen 1, 343 31 Älmhult, Sweden',
+    'contact.l4': 'Opening hours',
+    'contact.v4': 'Monday to Friday, 07:00 to 17:00',
+    'form.h3': 'Request a quote',
+    'form.hint': 'Briefly describe what you need help with and Jimmie will get back to you.',
+    'form.name': 'Name',
+    'form.namePh': 'Your name',
+    'form.phone': 'Phone',
+    'form.email': 'Email',
+    'form.emailPh': 'your@email.com',
+    'form.type': 'Type of project',
+    'form.opt1': 'Deck / sunroom',
+    'form.opt2': 'Kitchen / interiors',
+    'form.opt3': 'Renovation',
+    'form.opt4': 'Windows / doors',
+    'form.opt5': 'Garage / shed',
+    'form.opt6': 'Other',
+    'form.msg': 'Describe your project',
+    'form.msgPh': 'Tell us briefly what you would like done...',
+    'form.send': 'Send request',
+    'form.note': 'Free of charge and no obligations. We never share your details.',
+    'footer.legal': '© 2026 Jimmies Snickeri AB · Corp. ID 000000-0000 (placeholder) · F-tax certified'
+  };
+  const META = {
+    sv: {
+      title: 'Jimmies Snickeri AB | Hantverk med hjärta i Älmhult',
+      alert: 'Tack för din förfrågan! (Formuläret är en platshållare och skickar inget ännu.)',
+      label: 'EN'
+    },
+    en: {
+      title: 'Jimmies Snickeri AB | Carpentry with heart in Älmhult, Sweden',
+      alert: 'Thank you for your enquiry! (The form is a placeholder and does not send anything yet.)',
+      label: 'SV'
+    }
+  };
+
+  // Fånga de svenska originaltexterna från sidan
+  const SV = {};
+  const SV_PH = {};
+  document.querySelectorAll('[data-i18n]').forEach(el => { SV[el.dataset.i18n] = el.innerHTML; });
+  document.querySelectorAll('[data-i18n-ph]').forEach(el => { SV_PH[el.dataset.i18nPh] = el.placeholder; });
+
+  let lang = localStorage.getItem('js-lang') || 'sv';
+  function setLang(l) {
+    lang = l;
+    localStorage.setItem('js-lang', l);
+    document.documentElement.lang = l;
+    document.title = META[l].title;
+    document.getElementById('langLabel').textContent = META[l].label;
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.dataset.i18n;
+      el.innerHTML = l === 'sv' ? SV[key] : (EN[key] || SV[key]);
+    });
+    document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+      const key = el.dataset.i18nPh;
+      el.placeholder = l === 'sv' ? SV_PH[key] : (EN[key] || SV_PH[key]);
+    });
+  }
+  document.getElementById('langBtn').addEventListener('click', () => setLang(lang === 'sv' ? 'en' : 'sv'));
+  if (lang !== 'sv') setLang(lang);
+  else document.getElementById('langLabel').textContent = META.sv.label;
+
+  // ---------- Formulär (platshållare) ----------
+  document.getElementById('quoteForm').addEventListener('submit', e => {
+    e.preventDefault();
+    alert(META[lang].alert);
+  });
+
+  // ---------- Mobilmeny ----------
+  const burger = document.getElementById('burger');
+  const navLinks = document.getElementById('navLinks');
+  burger.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  // ---------- Mjuk inglidning av sektioner ----------
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
